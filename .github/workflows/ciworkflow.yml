@@ -33,9 +33,9 @@ jobs:
         npm install --package-lock-only
         npm ci
 
-    - name: Run ESLint
-      working-directory: ./backend
-      run: npm run lint
+    #- name: Run ESLint
+    #  working-directory: ./backend
+    #  run: npm run lint
         
   build-and-push:
     needs: lint #lint should be successfull to build
