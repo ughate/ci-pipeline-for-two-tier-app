@@ -6,7 +6,39 @@ on:
     branches: [ "main" ]
 #what jobs will be run upon the workflow trigger
 jobs:
+  # to lint the code
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v7
+
+    # Run Frontend HTML Linter
+    - name: Run HTML Hint
+      run: |
+        npm install -g htmlhint
+        htmlhint "frontend/**/*.html"
+
+    # Run Backend JavaScript Linter
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: backend/package.json
+
+    - name: Install backend development tools
+      run: |
+        cd backend
+        npm ci
+
+    - name: Run ESLint
+      run: |
+        cd backend
+        npm run lint
+        
   build-and-push:
+    needs: lint #lint should be successfull to build
     runs-on: ubuntu-latest
 #steps inside jobs
     #This steps copy the code to ephermal runner for review syntax by linter in step 2
