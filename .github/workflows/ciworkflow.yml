@@ -36,7 +36,6 @@ jobs:
     - name: Run ESLint
       working-directory: ./backend
       run: |
-        cd backend
         npm run lint
         
   build-and-push:
