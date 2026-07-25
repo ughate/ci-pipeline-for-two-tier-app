@@ -1,0 +1,38 @@
+#name of workflow
+name: Build and Push to Docker Hub 
+#when the workflow should be triggered
+on:
+  push:
+    branches: [ "main" ]
+#what jobs will be run upon the workflow trigger
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+#steps inside jobs
+    #This steps copy the code to ephermal runner for review syntax by linter in step 2
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push Frontend
+      uses: docker/build-push-action@v5
+      with:
+        context: ./frontend
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/simple-frontend:latest
+
+    - name: Build and push Backend
+      uses: docker/build-push-action@v5
+      with:
+        context: ./backend
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/simple-backend:latest
