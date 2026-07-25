@@ -35,7 +35,7 @@ jobs:
 
     - name: Run ESLint
       working-directory: ./backend
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npm run lint
         
   build-and-push:
     needs: lint #lint should be successfull to build
