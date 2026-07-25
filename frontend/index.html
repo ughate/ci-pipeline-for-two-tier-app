@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Visitor Counter</title></head>
+<body>
+    <h1>Welcome to My App</h1>
+    <h2 id="counter">Loading visitors...</h2>
+    <script>
+        // Fetches visitor count from the backend container
+        fetch('http://localhost:5000/api/visitors')
+            .then(res => res.json())
+            .then(data => document.getElementById('counter').innerText = `Visitors: ${data.count}`)
+            .catch(() => document.getElementById('counter').innerText = "Backend Unreachable");
+    </script>
+</body>
+</html>
