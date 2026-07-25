@@ -28,7 +28,9 @@ jobs:
         cache-dependency-path: backend/package.json
    
     - name: Install backend development tools
-      run: npm ci
+      run: |
+        npm install --package-lock-only
+        npm ci
 
     - name: Run ESLint
       run: |
