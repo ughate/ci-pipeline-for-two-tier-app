@@ -31,7 +31,7 @@ jobs:
       run: |
         cd backend
         install npm
-        npm ci
+        npm i
 
     - name: Run ESLint
       run: |
