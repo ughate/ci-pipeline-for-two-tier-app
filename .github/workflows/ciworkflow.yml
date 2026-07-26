@@ -1,5 +1,5 @@
 #name of workflow
-name: Build and Push to Docker Hub 
+name: lint
 #when the workflow should be triggered
 on:
   push:
