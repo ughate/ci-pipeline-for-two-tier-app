@@ -28,7 +28,7 @@ jobs:
           echo "Deploying build images to the server..."
           docker pull ughate/simple-backend:latest
           docker pull ughate/simple-frontend:latest
-          docker run -d --name simple-backend -p 8080:8080 ughate/simple-backend:latest
-          docker run -d --name simple-frontend -p 3000:3000 ughate/simple-frontend:latest
+          docker run -d --name new-simple-backend -p 8080:8080 ughate/simple-backend:latest
+          docker run -d --name new-simple-frontend -p 3000:3000 ughate/simple-frontend:latest
 
           # Add your deployment commands here
